@@ -3,11 +3,16 @@ const orm = require('../config/orm')();
 module.exports = {
 
   getBurgers() {
-    return orm.selectAll()
-      .then(data => data)
-      .catch(() => {
-        console.log('select failed')
-      })
+    return new Promise(resolve => {
+      orm.selectAll()
+        .then(data => {
+          resolve(data)
+        })
+        .catch(() => {
+          console.log('select failed');
+          resolve()
+        });
+    })
   },
 
   newBurger(burger) {
@@ -16,8 +21,8 @@ module.exports = {
       .catch(() => false)
   },
 
-  devour(burger, id) {
-    return orm.insertOne(burger)
+  devour(id) {
+    return orm.updateOne(true, id)
       .then(() => true)
       .catch(() => false)
   }

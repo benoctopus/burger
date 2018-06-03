@@ -2,7 +2,9 @@ mysql = require('mysql');
 
 connection = mysql.createConnection({
   host: 'localhost',
-  user: 'benoctopus',
+  user: 'root',
+  database: 'burgers_db',
+  password: ''
 });
 
 connection.connect(err => {

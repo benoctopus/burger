@@ -1,5 +1,38 @@
+<h1>Eat-Da-Burger</h1>
 <main id="content">
-  <div id="burgers"></div>
-  <div id="burger-image"></div>
-  <div id="new-burger"></div>
+  <div id="burgers">
+    <h2>Ready to Eat!</h2>
+    <ul>
+      {{#each data}}
+        {{#unless devoured}}
+        <li>
+          <p>{{burger_name}}</p>
+          <button class='devour' id={{id}}>Devour it!</button>
+        </li>
+        {{/unless}}
+      {{/each}}
+    </ul>
+  </div>
+  <div id="middle-wrapper">
+    <div id="burger-image">
+      <img src="assets/img/if_Food_C206_2427852.svg" alt="'burger"/>
+    </div>
+    <form id="new-burger">
+      <label for="new-burger-input">Place Order</label>
+      <input type="text" id="new-burger-input" required>
+      <input type="submit" required>
+    </form>
+  </div>
+  <div id="eaten">
+    <h2>Devoured Burgers</h2>
+    <ul>
+      {{#each data}}
+        {{#if devoured}}
+          <li>
+            <p>{{burger_name}}</p>
+          </li>
+        {{/if}}
+      {{/each}}
+    </ul>
+  </div>
 </main>

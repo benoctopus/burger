@@ -4,17 +4,18 @@ const
   parser = require('body-parser'),
   path = require('path'),
   routes = require('./controllers/burgers_controller'),
-  hbs = require('express-handlebars');
+  exphbs = require('express-handlebars');
 
-app.engine('hbs', hbs);
-app.set('view engine', 'hbs');
+
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, '/views'));
 
 app.use(parser.urlencoded({extended: true}));
 app.use(parser.json());
-app.use(express.static('app/client/public'));
+app.use(express.static(path.join('public')));
 
 app.use(routes);
 
-app.listen(process.env.PORT || 8000,
-  () => console.log(`https://localhost:8000`));
+app.listen(process.env.PORT || 8080,
+  () => console.log(`localhost:8080`));

@@ -5,12 +5,35 @@
   <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link href="burger_styles.css" rel="stylesheet" type="text/css"/>
+  <link href="/assets/css/burger_styles.css" rel="stylesheet" type="text/css"/>
   <title>burger shop</title>
 </head>
 <body>
 {{{body}}}
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
 <script>
+  $(document).ready(() => listeners());
+
+  function listeners() {
+
+    $('.devour').on('click', event => {
+      event.preventDefault();
+      $.post('/dev', {id: event.target.id}, res => {
+        location.reload()
+      })
+    });
+
+    $('#new-burger').on('submit', event => {
+      event.preventDefault();
+      console.log(event.target.children[1].value);
+      $.post('/create', {name: event.target.children[1].value}, res => {
+        location.reload()
+      })
+    });
+  }
 
 </script>
 </body>

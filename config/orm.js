@@ -3,11 +3,17 @@ class Orm {
     this.con = require('./connection');
   }
 
-  async selectAll() {
-    await this.con.query('select * from burgers;', null, (err, data) => {
-      if (err) throw err;
-      return data;
-    })
+  selectAll() {
+    return new Promise(resolve => (
+        this.con.query('select * from burgers;',
+          null,
+          (err, data) => {
+            if (err) throw err;
+            resolve(data);
+          }
+        )
+      )
+    )
   }
 
   async insertOne(value) {
@@ -22,16 +28,18 @@ class Orm {
     )
   }
 
-  async updateOne(value, id) {
-    await this.con.query(
-      'update burgers set devoured = ? where id = ?;',
-      [!!value, id],
-      (err, data) => {
-        if (err) throw err;
-        console.log(data);
-        return true;
-      }
-    )
+  updateOne(value, id) {
+    return new Promise(resolve => (
+      this.con.query(
+        'update burgers set devoured=? where id=?;',
+        [!!value, id],
+        (err, data) => {
+          if (err) throw err;
+          console.log(data);
+          resolve(true);
+        }
+      )
+    ))
   }
 }
 
