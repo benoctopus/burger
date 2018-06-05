@@ -1,7 +1,7 @@
 mysql = require('mysql');
 
 connection = mysql.createConnection({
-  host: 'localhost',
+  host: process.env.CLEARDB_DATABASE_URL || 'localhost',
   user: 'root',
   database: 'burgers_db',
   password: ''
