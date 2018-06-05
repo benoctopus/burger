@@ -1,8 +1,8 @@
 mysql = require('mysql');
-console.log(process.env.CLEARDB_DATABASE_URL);
+console.log(console.log(process.env.CLEARDB_DATABASE_URL || 'running locally'));
 let connection;
 if (process.env.CLEARDB_DATABASE_URL) {
-  connection = mysql.createConnection(process.env.process.env.CLEARDB_DATABASE_URL);
+  connection = mysql.createConnection(process.env.CLEARDB_DATABASE_URL);
 }
 else {
   connection = mysql.createConnection({
