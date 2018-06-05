@@ -1,12 +1,17 @@
 mysql = require('mysql');
-
-connection = mysql.createConnection({
-  host: process.env.CLEARDB_DATABASE_URL || 'localhost',
-  user: 'root',
-  database: 'burgers_db',
-  password: ''
-});
-
+//  ||
+let connection;
+if (process.env.process.env.CLEARDB_DATABASE_URL) {
+  connection = mysql.createConnection(process.env.process.env.CLEARDB_DATABASE_URL);
+}
+else {
+  connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    database: 'burgers_db',
+    password: ''
+  });
+}
 connection.connect(err => {
   if (err) throw err;
   console.log('connected to mysql')
